@@ -23,7 +23,7 @@ pipeline {
 
   stage('Docker Build and Tag') {
            steps {
-		   sh 'sudo -S service docker start'
+		   
                 sh 'docker build -t samplewebapp:latest .' 
                 sh 'docker tag samplewebapp Mahagithub15/samplewebapp:latest'
                 //sh 'docker tag samplewebapp Mahagithub15/samplewebapp:$BUILD_NUMBER'
