@@ -23,7 +23,7 @@ pipeline {
 
   stage('Docker Build and Tag') {
            steps {
-            
+                 sh 'docker context use default'
 		sh 'docker build -t samplewebapp:latest .' 
                 sh 'docker tag samplewebapp Mahagithub15/samplewebapp:latest'
                 //sh 'docker tag samplewebapp Mahagithub15/samplewebapp:$BUILD_NUMBER'
