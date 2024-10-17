@@ -23,10 +23,9 @@ pipeline {
 
   stage('Docker Build and Tag') {
            steps {
-                 sh 'docker context use default'
-		sh 'docker build -t samplewebapp:latest .' 
-                sh 'docker tag samplewebapp Mahagithub15/samplewebapp:latest'
-                //sh 'docker tag samplewebapp Mahagithub15/samplewebapp:$BUILD_NUMBER'
+                sh 'docker build -t LoginWebApp-1:latest .' 
+                sh 'docker tag samplewebapp Mahagithub15/LoginWebApp-1:latest'
+                //sh 'docker tag samplewebapp Mahagithub15/LoginWebApp-1:$BUILD_NUMBER'
                
           }
         }
@@ -35,8 +34,8 @@ pipeline {
           
             steps {
         withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push Mahagithub15/samplewebapp:latest'
-        //  sh  'docker push Mahagithub15/samplewebapp:$BUILD_NUMBER' 
+          sh  'docker push Mahagithub15/LoginWebApp-1:latest'
+        //  sh  'docker push Mahagithub15/LoginWebApp-1:$BUILD_NUMBER' 
         }
                   
           }
@@ -46,14 +45,14 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8003:8080 Mahagithub15/samplewebapp"
+                sh "docker run -d -p 8003:8080 Mahagithub15/LoginWebApp-1"
  
             }
         }
  stage('Run Docker container on remote hosts') {
              
             steps {
-                sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 8003:8080 Mahagithub15/samplewebapp"
+                sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 8003:8080 Mahagithub15/LoginWebApp-1"
  
             }
         }
