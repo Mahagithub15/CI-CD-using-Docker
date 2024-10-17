@@ -23,7 +23,8 @@ pipeline {
 
   stage('Docker Build and Tag') {
            steps {
-              
+               sh 'sudo apt-get install -y iptables'
+		 sh 'sudo update-alternatives --set iptables /usr/sbin/iptables-legacy'
                 sh 'docker build -t samplewebapp:latest .' 
                 sh 'docker tag samplewebapp Mahagithub15/samplewebapp:latest'
                 //sh 'docker tag samplewebapp Mahagithub15/samplewebapp:$BUILD_NUMBER'
